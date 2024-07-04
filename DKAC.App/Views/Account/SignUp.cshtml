@@ -1,0 +1,61 @@
+﻿@model UserModel
+
+<section class="vh-75 m-5">
+    <div class="container-fluid m-5 p-5">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-12 col-lg-12 col-xl-12 p-5 d-flex align-items-center justify-content-center">
+                <form asp-controller="Account" asp-action="SignUp" class="p-5" id="myFormSignUp">
+                    <div>
+                        <span class="h1 mb-4 d-block">ĐĂNG KÝ THÔNG TIN NGƯỜI DÙNG</span>
+                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-2 col-12">
+                        <label for="" class="col-5 h2">Tên đầy đủ: </label>
+                        <input asp-for="FullName" type="text" class="box h3 " placeholder="...................................................." id="FullName">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="col-5 h2">Tên đăng nhập: </label>
+                        <input asp-for="UserName" type="text" placeholder="...................................................." class="box h3" id="UserName">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="col-5 h2">Mật khẩu: </label>
+                        <input asp-for="Password" type="password" placeholder="...................................................." class="box h3" id="password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2 d-flex">
+                        <label asp-for="DepartmentId" class="col-5 h2">Phòng Ban:</label>
+                            <select asp-for="DepartmentId" class=" h3" asp-items="@(new SelectList(ViewBag.department,"DepartmentID","DepartmentName"))">
+                                @* <option value="" class="h2">Phòng ban</option>  *@
+                            </select>
+                        
+                    </div>
+                    <div class="mb-2">
+                        <span class="d-block h2 mt-3 mb-3">Quyền Đăng Ký</span>
+                        <div class="d-flex h2 ms-5">
+                            <input type="radio" id="individual" name="ManagerID" value="" checked />
+                            <label for="individual" class="me-3">Cá Nhân</label>
+                            <input type="radio" id="collective" name="ManagerID" value="collective" />
+                            <label for="collective">Tập Thể</label>
+                        </div>
+                    </div> 
+
+                    <div class="mb-5">
+                        <span class="d-block h2 mt-3 mb-3">Phân Quyền</span>
+                        <div class="d-flex h2 container-fluid ms-5">
+                            <input type="radio" id="user" asp-for="RoleID" value="2"></input>
+                            <label for="user" class="me-1 ms-2">User</label>
+                            <input type="radio" id="admin" asp-for="RoleID" value="1" class="ms-5 me-2"></input>
+                            <label for="admin">Admin</label>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <input type="submit" value="SIGN UP" class="btn btn-lg btn-outline-primary w-50 pt-3 pb-3">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

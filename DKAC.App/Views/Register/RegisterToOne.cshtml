@@ -1,0 +1,67 @@
+﻿ @model OrderModel
+
+<section>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12 col-lg-12 col-xl-12 p-5 d-flex align-items-center justify-content-center">
+                <form asp-controller="Register" asp-action="RegisterToOne" class="p-3">
+                    <div>
+                        <span class="h1 mb-4 d-block fw-bold">ĐĂNG KÝ ĂN CA CÁ NHÂN</span>
+                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-2 col-12">
+                        <input type="hidden" asp-for="UserID" value="@ViewBag.UserID" />
+                        <label asp-for="UserID" class="col-5 h3">HỌ TÊN: </label>
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                        <a id=""> <b class="h2" asp-for="UserID">@ViewBag.FullName</b></a>
+                    </div>
+                    <div class="mb-2 col-12">
+                        <input type="hidden" asp-for="DepartmentID" value="@ViewBag.DepartmentID" />
+                        <label asp-for="DepartmentID" class="col-5 h3">PHÒNG BAN: </label>
+                        <span asp-validation-for="DepartmentID" class="text-danger"></span>
+                        <a id=""> <b class="h2">@ViewBag.DepartmentName</b> </a>
+                    </div>
+
+
+                    <div class="mb-3 col-12">
+                        <span class="col-5 h3 me-5">NGÀY ĐĂNG KÝ: </span>
+                        <input asp-for="ShiftDate" type="datetime-local" class="box h3 ms-4" id="orderDate" placeholder="dd/MM/yyyy" value="" style="background-color: #CCFFFF" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                        <span asp-validation-for="ShiftDate" class="text-danger"></span>
+                    </div>
+
+
+                    <div>
+                        <div class="p-1">
+                            <input type="hidden" name="ShiftIDs" id="shiftID1" value="" />
+                            <label class="h3 p-3 ps-0">CA 1: </label>
+                            <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1 h2" onchange="toggleQuantityInput(this, 'shiftID1', 'quantityShift1', 1)">
+                            <input name="Quantities" type="textbox" id="quantityShift1" style="width: 6rem; background-color:#CCFFFF" class="h3 text-end" disabled>
+                            <label class="h3">xuất</label>
+                        </div>
+
+                        <div class="p-1">
+                            <input type="hidden" name="ShiftIDs" id="shiftID2" value="" />
+                            <label class="h3 p-2 ps-0">CA 2:</label>
+                            <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1 h2" onchange="toggleQuantityInput(this, 'shiftID2', 'quantityShift2', 2)">
+                            <input name="Quantities" type="textbox" id="quantityShift2" style="width: 6rem; background-color:#CCFFFF" class="h3 text-end" disabled>
+                            <label class="h3">xuất</label>
+                        </div>
+
+                        <div class="p-1">
+                            <input type="hidden" name="ShiftIDs" id="shiftID3" value="" />
+                            <label class="h3 p-2 ps-0">CA 3:</label>
+                            <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1h2" onchange="toggleQuantityInput(this, 'shiftID3', 'quantityShift3', 3)">
+                            <input name="Quantities" type="textbox" id="quantityShift3" style="width: 6rem; background-color:#CCFFFF" class="h3 text-end" disabled>
+                            <label class="h3">xuất</label>
+                        </div>
+
+                    </div>
+                    <div class="pt-1 mb-4 mt-3 d-flex">
+                        <input type="submit" value="OK" class="btn btn-lg btn-outline-primary w-25 pt-3 pb-3 me-5">
+                        <input type="submit" value="Cancel" class="btn btn-lg btn-outline-primary w-25 pt-3 pb-3" asp-controller="Home" asp-action="Index">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

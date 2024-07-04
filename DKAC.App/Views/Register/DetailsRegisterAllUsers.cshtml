@@ -1,0 +1,84 @@
+﻿@model OrderModel
+@{
+    var index = 0;
+}
+
+<section>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="">
+                    <div class="row g-0">
+                        <div class="d-flex align-items-center">
+                            <form asp-controller="Register" asp-action="UpdateDetailsRegisterAllUsers" method="post" class="w-100">
+                                <div class="card-body p-5 p-lg-3 text-black">
+                                    <div class="text-center m-4 p-1">
+                                        <span class="h1 mb-4 d-block fw-bold">ĐĂNG KÝ ĂN CA CHO TẬP THỂ</span>
+                                    </div>
+
+                                    <div class="p-1 d-flex">
+                                        <label for="" class="col-3 h2 me-1">HỌ TÊN: </label>
+                                        <a id=""><b class="h3 col-6">@ViewBag.FullName</b></a>
+                                    </div>
+
+                                    <div class="p-1 d-flex">
+                                        <input type="hidden" asp-for="DepartmentID" value="@ViewBag.DepartmentID" />
+                                        <span asp-for="DepartmentID" class="col-3 h2 me-1">PHÒNG BAN: </span>
+                                        <span asp-validation-for="DepartmentID" class="text-danger"></span>
+                                        <span class="h3 col-6">@ViewBag.DepartmentName</span>
+                                    </div>
+
+                                    <div class="p-1 d-flex">
+                                        <label class="col-3 h2 me-1">NGÀY ĐĂNG KÝ: </label>
+                                        <input asp-for="ShiftDate" type="datetime-local" class="h3 col-6" placeholder="DD/MM/YYYY" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                        <span asp-validation-for="ShiftDate" class="text-danger"></span>
+                                    </div>
+                                    <br>
+
+                                    <div class="d-flex p-1">
+                                        <span class="col-sm-6 col-lg-3 h3">Danh SÁCH HỌ TÊN</span>
+                                        <span class="col-sm-2 col-lg-3 h3">CA 1</span>
+                                        <span class="col-sm-2 col-lg-3 h3">CA 2</span>
+                                        <span class="col-sm-2 col-lg-3 h3">CA 3</span>
+                                    </div>
+
+                                    <div class="p-1">
+                                        @foreach (var userOrder in Model.UserOrders)
+                                        {
+                                            <div class="d-flex p-1 mb-2">
+                                                <div class="col-sm-6 col-lg-3 h3">
+                                                    <label>@userOrder.FullName</label>
+                                                    <input type="hidden" name="UserIDs" value="" />
+                                                </div>
+                                                @foreach (var shiftOrder in userOrder.ShiftOrders)
+                                                {
+                                                    var shiftInputId = "shiftID" + shiftOrder.ShiftID + "_" + index;
+                                                    var quantityInputId = "quantityShift" + shiftOrder.ShiftID + "_" + index;
+                                                    var userInputId = "userID" + userOrder.UserID + "_" + index;
+                                                    var isChecked = shiftOrder.Quantity > 0 ? "checked" : "";
+
+                                                    <div class="col-sm-2 col-lg-3 d-flex">
+                                                        <input type="hidden" name="ShiftIDs" id="@shiftInputId" value="@(shiftOrder.Quantity > 0 ? shiftOrder.ShiftID.ToString() : "")" />
+                                                        <input type="hidden" name="UserIDs" id="@userInputId" value="@(shiftOrder.Quantity > 0 ? userOrder.UserID.ToString() : "")" />
+                                                        <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1" data-shiftid="@shiftOrder.ShiftID" data-userid="@userOrder.UserID" onchange="toggleQuantityUpdate(this, '@shiftInputId', '@quantityInputId', '@userInputId')" @isChecked>
+                                                        <input name="Quantities" type="text" id="@quantityInputId" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" value="@(shiftOrder.Quantity > 0 ? shiftOrder.Quantity.ToString() : "")" @(shiftOrder.Quantity > 0 ? "" : "disabled")>
+                                                    </div>
+                                                }
+                                            </div>
+                                            index++;
+                                        }
+                                    </div>
+
+                                    <div class="pt-1 mb-4 mt-3 text-center">
+                                        <button class="btn btn-lg btn-outline-primary pt-3 pb-3 me-5" type="submit" style="width: 12em">Ok</button>
+                                        <button class="btn btn-lg btn-outline-primary pt-3 pb-3" type="submit" asp-controller="Register" asp-action="DetailsRegisterAllUsers" style="width: 12em">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

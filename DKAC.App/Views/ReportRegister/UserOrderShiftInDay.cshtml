@@ -1,0 +1,98 @@
+﻿@using DKAC.Repositories
+@using System.Globalization
+@model IEnumerable<Departments>
+
+@{
+    ViewData["Title"] = "UserOrderShiftInDay";
+    int totalQuantities = 0;
+
+    var numberFormatInfo = new NumberFormatInfo
+            {
+                NumberGroupSeparator = ".",
+                NumberDecimalSeparator = ","
+            };
+    foreach (var department in Model)
+    {
+        foreach (var userOrder in department.UserOrders)
+        {
+            totalQuantities += userOrder.TotalQuantity;
+        }
+    }
+}
+<section class="vh-75">
+    <div class="container-fluid">
+        <form asp-action="UserOrderShiftInDay" method="get" class="mb-5">
+            <div class="form-group text-center">
+                <label for="dateInsert" class="h1">THỐNG KÊ ĂN CA NGÀY: <input type="date" class="box" id="dateInsert" name="dateInsert" value="@DateTime.Now.ToString("yyyy-MM-dd")" /></label>
+            </div>
+            <div class="form-group h2">
+                 <label for="shiftID">Chọn ca:</label>
+                <select class="ms-3" id="shiftID" name="shiftID">
+                    <option value="1">Ca 1</option>
+                    <option value="2">Ca 2</option>
+                    <option value="3">Ca 3</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Xem Thống Kê</button>
+        </form>
+
+        <p class="h3">Ca : Tổng số xuất: @totalQuantities Xuất.</p>
+
+        <table class="table m-5 pb-5 border border-dark">
+            <thead class="h1 text-center">
+                <tr>
+                    <th class="border border-dark">
+                        STT
+                    </th>
+                    <th class="border border-dark">
+                        FullName
+                    </th>
+                    <th class="border border-dark">
+                        Số lượng
+                    </th>
+                    <th class="border border-dark">
+                        Thành tiền
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="h3">
+                @foreach (var department in Model)
+                {
+                    int quanity = 0;
+                    <tr colspan="4" class="border border-dark">
+                        <td colspan="4" class="font-weight-bold">@department.DepartmentName</td>
+                    </tr>
+                    int stt = 1;
+                    foreach (var userOrder in department.UserOrders)
+                    {
+                        <tr>
+                            <td class="border border-dark">@stt</td>
+                            <td class="border border-dark">@userOrder.FullName</td>
+                            <td class="border border-dark">@userOrder.TotalQuantity</td>
+                            <td class="border border-dark">@String.Format(numberFormatInfo, "{0:N0}", userOrder.TotalQuantity * 15000)</td>
+                        </tr>
+                        stt++;
+                        quanity += userOrder.TotalQuantity;
+                    }
+                    totalQuantities += quanity;
+                    <tr>
+                        <td class="border border-dark"></td>
+                        <td class="font-weight-bold border border-dark">Tổng: </td>
+                        <td class="border border-dark">@quanity</td>
+                        <td class="border border-dark">@String.Format(numberFormatInfo, "{0:N0}", quanity * 15000)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @* <div class="pagination">
+        @if (ViewBag.PageNumber > 1)
+        {
+        <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber - 1 })" class="btn btn-secondary">Previous</a>
+        }
+        @if (ViewBag.HasNextPage)
+        {
+        <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber + 1 })" class="btn btn-primary">Next</a>
+        }
+        </div> *@
+    </div>
+</section>

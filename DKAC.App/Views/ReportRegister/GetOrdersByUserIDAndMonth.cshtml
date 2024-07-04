@@ -1,0 +1,83 @@
+﻿@using DKAC.Repositories
+@using System.Globalization
+@model IEnumerable<UserOrder>
+
+@{
+    ViewData["Title"] = "Index";
+    var numberFormatInfo = new NumberFormatInfo
+            {
+                NumberGroupSeparator = ".",
+                NumberDecimalSeparator = ","
+            };
+}
+<section class="vh-75">
+    <div class="container-fluid">
+        <h1 class="h1 fw-bold  text-center">
+            THỐNG KÊ ĂN CA CÁ NHÂN
+        </h1>
+        <div class="text-center h2 mt-2 mb-5">
+            <p>Họ tên:  @ViewBag.FullName</p>
+            <p>Phòng: @ViewBag.DepartmentName</p>
+        </div>
+        
+        <table class="table m-2 border border-dark text-center  ">
+            <thead class="h1">
+                <tr>
+                    <th class="border border-dark">
+                        STT
+                    </th>
+                    <th class="border border-dark">
+                        Ngày
+                    </th>
+                    <th class="border border-dark">
+                        Ca 1
+                    </th>
+                    <th class="border border-dark">
+                        Ca 2
+                    </th>
+                    <th class="border border-dark">
+                        Ca 3
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="h3">
+                @{
+                    int index = 1;
+                    int totalShift1 = 0;
+                    int totalShift2 = 0;
+                    int totalShift3 = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    totalShift1 += item.Shift1Quantity;
+                    totalShift2 += item.Shift2Quantity;
+                    totalShift3 += item.Shift3Quantity;
+                    <tr>
+                        <td class="border border-dark">@index</td>
+                        <td class="border border-dark">@item.OrderDate.ToString("dd/MM/yyyy")</td>
+                        <td class="border border-dark">@(item.Shift1Quantity > 0 ? item.Shift1Quantity.ToString() : " ")</td>
+                        <td class="border border-dark">@(item.Shift2Quantity > 0 ? item.Shift2Quantity.ToString() : " ")</td>
+                        <td class="border border-dark">@(item.Shift3Quantity > 0 ? item.Shift3Quantity.ToString() : " ")</td>
+                    </tr>
+                    index++;
+                }
+                <tr>
+                    <td colspan="2" class="border border-dark">Tổng</td>
+                    <td class="border border-dark">@(totalShift1 > 0 ? totalShift1.ToString() : " ")</td>
+                    <td class="border border-dark">@(totalShift2 > 0 ? totalShift2.ToString() : " ")</td>
+                    <td class="border border-dark">@(totalShift3 > 0 ? totalShift3.ToString() : " ")</td>
+                </tr>
+            </tbody>
+        </table>
+        @* <div class="pagination">
+        @if (ViewBag.PageNumber > 1)
+        {
+        <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber - 1 })" class="btn btn-secondary">Previous</a>
+        }
+        @if (ViewBag.HasNextPage)
+        {
+        <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber + 1 })" class="btn btn-primary">Next</a>
+        }
+        </div> *@
+    </div>
+</section>

@@ -1,0 +1,97 @@
+﻿@using DKAC.Repositories
+@model IEnumerable<Orders>
+
+@{
+    ViewData["Title"] = "Index";
+    var departmentNames = ViewBag.DepartmentNames as List<string>;
+    var fullName = ViewBag.FullName as List<string>;
+    var shiftNames = ViewBag.ShiftNames as List<string>;
+    int index = 1;
+}
+<section class="vh-75">
+    <div class="container-fluid">
+
+        @if (Model.Any())
+        {
+            <table class="table m-2">
+                <thead class="h1">
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            FullName
+                        </th>
+                        <th>
+                            ShiftName
+                        </th>
+                        <th>
+                            DepartmentName
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShiftDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TimeEdit)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="h3">
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <tr>
+                            <td>
+                                @index
+                            </td>
+                            <td>
+                                @fullName[i]
+                            </td>
+                            <td>
+                                @shiftNames[i]
+                            </td>
+                            <td>
+                                @departmentNames[i]
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.ElementAt(i).Quantity)
+                            </td>
+                            <td>
+                                @Model.ElementAt(i).OrderDate.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @Model.ElementAt(i).ShiftDate.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @if (Model.ElementAt(i).TimeEdit != TimeSpan.Zero)
+                                {
+                                    @Model.ElementAt(i).TimeEdit.ToString("hh\\:mm\\:ss")
+                                }
+                                else
+                                {
+                                    <span></span>
+                                }
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+            </table>
+            @* <div class="pagination">
+                @if (ViewBag.PageNumber > 1)
+                {
+                    <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber - 1 })" class="btn btn-secondary h4">Previous</a>
+                }
+                @if (ViewBag.HasNextPage)
+                {
+                    <a href="@Url.Action("Index", new { pageNumber = ViewBag.PageNumber + 1 })" class="btn btn-primary h4">Next</a>
+                }
+            </div> *@
+        }
+    </div>
+</section>
