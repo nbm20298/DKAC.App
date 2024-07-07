@@ -1,6 +1,4 @@
-﻿using DKAC.App.Helpers;
-using DKAC.App.Interfaces;
-using DKAC.Services.Implementations;
+﻿using DKAC.Services.Implementations;
 using DKAC.Services.Interfaces;
 
 namespace DKAC.App.Configuration

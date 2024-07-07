@@ -30,7 +30,7 @@
 
                                     <div class="p-1 d-flex">
                                         <label class="col-3 h2 me-1">NGÀY ĐĂNG KÝ: </label>
-                                        <input asp-for="ShiftDate" type="datetime-local" class="h3 col-6" placeholder="DD/MM/YYYY" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                        <input asp-for="ShiftDate" type="datetime-local" class="h3 col-6" style="background-color: #e2f1ff" placeholder="DD/MM/YYYY" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
                                         <span asp-validation-for="ShiftDate" class="text-danger"></span>
                                     </div>
                                     <br>
@@ -61,7 +61,7 @@
                                                         <input type="hidden" name="ShiftIDs" id="@shiftInputId" value="@(shiftOrder.Quantity > 0 ? shiftOrder.ShiftID.ToString() : "")" />
                                                         <input type="hidden" name="UserIDs" id="@userInputId" value="@(shiftOrder.Quantity > 0 ? userOrder.UserID.ToString() : "")" />
                                                         <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1" data-shiftid="@shiftOrder.ShiftID" data-userid="@userOrder.UserID" onchange="toggleQuantityUpdate(this, '@shiftInputId', '@quantityInputId', '@userInputId')" @isChecked>
-                                                        <input name="Quantities" type="text" id="@quantityInputId" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" value="@(shiftOrder.Quantity > 0 ? shiftOrder.Quantity.ToString() : "")" @(shiftOrder.Quantity > 0 ? "" : "disabled")>
+                                                        <input name="Quantities" type="text" id="@quantityInputId" style="width: 6rem; background-color:#e2f1ff" class="h3 text-end" value="@(shiftOrder.Quantity > 0 ? shiftOrder.Quantity.ToString() : "")" @(shiftOrder.Quantity > 0 ? "" : "disabled")>
                                                     </div>
                                                 }
                                             </div>

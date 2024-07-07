@@ -18,6 +18,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.bg-color {
+    background-color: #f8f9fa;
+}
+
 section {
     padding: 3rem 7%;
 }

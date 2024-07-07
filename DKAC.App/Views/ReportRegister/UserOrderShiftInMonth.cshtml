@@ -54,9 +54,9 @@
                         <tr class="">
                             <td class=" border border-dark text-center">@stt</td>
                             <td class=" border border-dark">@userOrder.FullName</td>
-                            <td class=" border border-dark">@(userOrder.Shift1Quantity > 0 ? userOrder.Shift1Quantity.ToString() : " ")</td>
-                            <td class=" border border-dark">@(userOrder.Shift2Quantity > 0 ? userOrder.Shift2Quantity.ToString() : " ")</td>
-                            <td class=" border border-dark">@(userOrder.Shift3Quantity > 0 ? userOrder.Shift3Quantity.ToString() : " ")</td>
+                            <td class=" border border-dark @(userOrder.Shift1Quantity > 0 ? "bg-light" : "")">@(userOrder.Shift1Quantity > 0 ? userOrder.Shift1Quantity.ToString() : " ")</td>
+                            <td class=" border border-dark @(userOrder.Shift2Quantity > 0 ? "bg-light" : "")">@(userOrder.Shift2Quantity > 0 ? userOrder.Shift2Quantity.ToString() : " ")</td>
+                            <td class=" border border-dark @(userOrder.Shift3Quantity > 0 ? "bg-light" : "")">@(userOrder.Shift3Quantity > 0 ? userOrder.Shift3Quantity.ToString() : " ")</td>
                             <td class=" border border-dark">@(userOrder.Shift1Quantity + userOrder.Shift2Quantity + userOrder.Shift3Quantity)</td>
                             <td class=" border border-dark">@String.Format(numberFormatInfo, "{0:N0}", (userOrder.Shift1Quantity + userOrder.Shift2Quantity + userOrder.Shift3Quantity) * 15000)</td>
                         </tr>

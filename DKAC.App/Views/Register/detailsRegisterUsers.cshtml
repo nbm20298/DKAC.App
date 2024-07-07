@@ -24,7 +24,7 @@
 
                     <div class="mb-3 col-12">
                         <span class="col-5 h3 me-5">NGÀY ĐĂNG KÝ: </span>
-                        <input asp-for="OrderDate" type="datetime-local" class="box h3 ms-4" id="orderDate" placeholder="dd/MM/yyyy" style="" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                        <input asp-for="OrderDate" type="datetime-local" class="box h3 ms-4" id="orderDate" placeholder="dd/MM/yyyy" style="background-color: #e2f1ff" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
 
@@ -39,7 +39,7 @@
                                 <input type="hidden" name="ShiftIDs" id="@shiftInputId" value="@(shiftOrder.Quantity > 0 ? shiftOrder.ShiftID.ToString() : "")" />
                                 <label class="h3 p-3 ps-0">CA @shiftOrder.ShiftID: </label>
                                 <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1 h2" onchange="toggleQuantityInput(this, '@shiftInputId', '@quantityInputId', '@shiftOrder.ShiftID')" @isChecked>
-                                <input name="Quantities" type="text" id="@quantityInputId" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" value="@(shiftOrder.Quantity > 0 ? shiftOrder.Quantity.ToString() : "")" @(shiftOrder.Quantity > 0 ? "" : "disabled")>
+                                <input name="Quantities" type="text" id="@quantityInputId" style="width: 6rem; background-color:#e2f1ff" class="h3 text-end" value="@(shiftOrder.Quantity > 0 ? shiftOrder.Quantity.ToString() : "")" @(shiftOrder.Quantity > 0 ? "" : "disabled")>
                                 <label class="h3">xuất</label>
                             </div>
                         }

@@ -30,7 +30,7 @@
 
                                     <div class="p-1 d-flex">
                                         <label class="col-3 h2 me-1">NGÀY ĐĂNG KÝ: </label>
-                                        <input asp-for="ShiftDate" type="datetime-local" class="h3 col-6" placeholder="DD/MM/YYYY" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                        <input asp-for="ShiftDate" type="datetime-local" class="h3 col-6" style="background-color: #e2f1ff" placeholder="DD/MM/YYYY" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
                                         <span asp-validation-for="ShiftDate" class="text-danger"></span>
                                     </div>
                                     <br>
@@ -55,21 +55,21 @@
                                                     <input type="hidden" name="ShiftIDs" id="shiftID1_@index" value="" />
                                                     <input type="hidden" name="UserIDs" id="userID1_@index" value="" />
                                                     <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1" onchange="toggleQuantityInputs(this, 'shiftID1_@index', 'quantityShift1_@index', 'userID1_@index', @user.UserID, 1)">
-                                                    <input name="Quantities" type="text" id="quantityShift1_@index" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" disabled>
+                                                    <input name="Quantities" type="text" id="quantityShift1_@index" style="width: 6rem; background-color:#e2f1ff" class="h3 text-end" disabled>
                                                 </div>
 
                                                 <div class="col-sm-2 col-lg-3">
                                                     <input type="hidden" name="ShiftIDs" id="shiftID2_@index" value="" />
                                                     <input type="hidden" name="UserIDs" id="userID2_@index" value="" />
                                                     <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1" onchange="toggleQuantityInputs(this, 'shiftID2_@index', 'quantityShift2_@index', 'userID2_@index', @user.UserID, 2)">
-                                                    <input name="Quantities" type="text" id="quantityShift2_@index" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" disabled>
+                                                    <input name="Quantities" type="text" id="quantityShift2_@index" style="width: 6rem; background-color:#e2f1ff" class="h3 text-end" disabled>
                                                 </div>
 
                                                 <div class="col-sm-2 col-lg-3">
                                                     <input type="hidden" name="ShiftIDs" id="shiftID3_@index" value="" />
                                                     <input type="hidden" name="UserIDs" id="userID3_@index" value="" />
                                                     <input type="checkbox" class="custom-checkbox m-1 me-4 ms-1" onchange="toggleQuantityInputs(this, 'shiftID3_@index', 'quantityShift3_@index', 'userID3_@index', @user.UserID, 3)">
-                                                    <input name="Quantities" type="text" id="quantityShift3_@index" style="width: 6rem; background-color:#f3f1f1" class="h3 text-end" disabled>
+                                                    <input name="Quantities" type="text" id="quantityShift3_@index" style="width: 6rem; background-color:#e2f1ff" class="h3 text-end" disabled>
                                                 </div>
                                             </div>
                                             index++;

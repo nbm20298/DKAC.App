@@ -1,4 +1,5 @@
 ﻿using DKAC.App.Models;
+using DKAC.Repositories;
 using DKAC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
@@ -83,8 +84,17 @@ namespace DKAC.App.Areas.Admin.Controllers
             bool result = authenticationService.UpdatePassword(model.ID, model.OldPassword, model.NewPassword);
             if (result)
             {
+                int userID = (int)HttpContext.Session.GetInt32("UserID");
+                string roleName = authenticationService.getRoleNameUser(userID);
+
+                if (roleName == "Admin")
+                {
+                    toastNotification.AddSuccessToastMessage("Thay đổi mật khẩu thành công", new ToastrOptions { PositionClass = ToastPositions.BottomRight, TimeOut = 2000 });
+                    return RedirectToAction("Index");
+                }
                 toastNotification.AddSuccessToastMessage("Thay đổi mật khẩu thành công", new ToastrOptions { PositionClass = ToastPositions.BottomRight, TimeOut = 2000 });
-                return RedirectToAction("Index");
+                return RedirectToAction("RegisterToOne", "Register");
+
             }
             else
             {

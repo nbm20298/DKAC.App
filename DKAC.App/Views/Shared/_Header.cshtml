@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     int? userID = ViewContext.HttpContext.Session.GetInt32("UserID");
     string fullName = ViewContext.HttpContext.Session.GetString("FullName");
     bool isLoggedIn = userID.HasValue && userID.Value != 0;
@@ -48,7 +49,7 @@
         {
             <a id="logged" class="">@fullName</a>
         }
-        <a id="menu" class="fas fa-bars"></a>
+            <a id="menu" class="fas fa-bars"></a>
     </div>
 
     <div class="logged-form" id="logged_form">

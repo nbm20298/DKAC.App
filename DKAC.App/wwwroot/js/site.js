@@ -74,6 +74,11 @@ $(document).ready(function () {
     });
 });
 
+document.querySelector('#menu').onclick = () => {
+    navbar.classList.toggle('active');
+    login.classList.remove('active');
+}
+
 window.onscroll = () => {
     navbar.classList.remove('active');
     login.classList.remove('active');

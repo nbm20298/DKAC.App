@@ -52,6 +52,11 @@ namespace DKAC.App.Controllers
 
                         HttpContext.Session.SetInt32("DepartmentID", departmentID);
                         int? sessionDepartmentID = HttpContext.Session.GetInt32("DepartmentID");
+
+                        string fullName = authenticationService.getFullName(user.UserID);
+                        HttpContext.Session.SetString("FullName", fullName);
+                        string sessionFullName = HttpContext.Session.GetString("FullName");
+
                         toastNotification.AddSuccessToastMessage("Đăng nhập thành công", new ToastrOptions { PositionClass = ToastPositions.BottomRight, TimeOut = 2000 });
                         return RedirectToAction("RegisterToOne", "Register");
                     }
@@ -67,6 +72,7 @@ namespace DKAC.App.Controllers
         {
             HttpContext.Session.Remove("UserID");
             HttpContext.Session.Remove("DepartmentID");
+            HttpContext.Session.Remove("FUllName");
 
             toastNotification.AddSuccessToastMessage("Đăng xuất thành công", new ToastrOptions { PositionClass = ToastPositions.BottomRight, TimeOut = 2000 });
             return RedirectToAction("Index", "Home");
