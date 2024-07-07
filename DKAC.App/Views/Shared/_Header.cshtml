@@ -1,34 +1,35 @@
 ﻿@{
     int? userID = ViewContext.HttpContext.Session.GetInt32("UserID");
+    string fullName = ViewContext.HttpContext.Session.GetString("FullName");
     bool isLoggedIn = userID.HasValue && userID.Value != 0;
 }
 
 <header class="header">
-    <a asp-controller="Home" asp-action="Index" class="logo col-lg-2 col-xl-3">
+    <a asp-controller="Home" asp-action="Index" class="logo col-3">
         <img src="~/Img/logo-esc.png" alt="Alternate Text" class="w-25" />
     </a>
 
-    <nav class="c-navbar col-lg-4 col-xl-6" id="nav">
+    <nav class="c-navbar col-6 text-center" id="nav">
         <div class="main-menu">
             <ul>
                 <li>
-                    <a>Admin</a>
-                    <ul class="sub-menu">
+                    <a class="h1">Admin</a>
+                    <ul class="sub-menu text-start">
                         <li><a asp-area="" asp-controller="HomeManager" asp-action="Index">Quản lý giao diện </a></li>
                         <li><a asp-area="" asp-controller="UserMangager" asp-action="Index">Quản lý user </a></li>
                         <li><a asp-area="" asp-controller="DepartmentManager" asp-action="Index">Quản lý Phong ban </a></li>
                     </ul>
                 </li>
                 <li>
-                    <a>Đăng ký</a>
-                    <ul class="sub-menu">
+                    <a class="h1">Đăng ký</a>
+                    <ul class="sub-menu text-start">
                         <li><a asp-controller="Register" asp-action="RegisterToOne">Đăng ký cho cá nhân </a></li>
                         <li><a asp-controller="Register" asp-action="RegisterMealsForUsers">Đăng ký cho tập thể </a></li>
                     </ul>
                 </li>
                 <li>
-                    <a>Báo cáo</a>
-                    <ul class="sub-menu">
+                    <a class="h1">Báo cáo</a>
+                    <ul class="sub-menu text-start" >
                         <li><a asp-action="GetOrdersByUserIDAndMonth" asp-controller="ReportRegister">Thống kê cá nhân </a></li>
                         <li><a asp-action="UserOrderShiftInDay" asp-controller="ReportRegister">ĐV thống kê hàng ngày </a></li>
                         <li><a asp-action="UserOrderShiftInMonth" asp-controller="ReportRegister">ĐV thống kê theo tháng</a></li>
@@ -38,20 +39,20 @@
         </div>
     </nav>
 
-    <div class="icons col-1">
+    <div class="icons col-3 text-end">
         @if (!isLoggedIn)
         {
             <a id="login" class="fas fa-user" asp-controller="Account" asp-action="Login"></a>
         }
         else
         {
-            <a id="logged" class="fas fa-user"> </a>
+            <a id="logged" class="">@fullName</a>
         }
         <a id="menu" class="fas fa-bars"></a>
     </div>
-    </div>
 
     <div class="logged-form" id="logged_form">
-        <a asp-controller="Account" asp-action="Logout" >Logout</a>
+        <a asp-controller="UserMangager" asp-action="UpdatePassword" asp-route-userId="@userID">Reset Password</a>
+        <a asp-controller="Account" asp-action="Logout">Logout</a>
     </div>
 </header>

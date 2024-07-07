@@ -45,7 +45,7 @@
                             <td class="d-flex">
                                 @Html.ActionLink("Delete", "Delete", new { UserID = Model.ElementAt(i).UserID })
                                 <p class="ms-3 me-3">||</p>
-                                <a asp-controller="UserMangager" asp-action="UpdatePassword" asp-route-userId="@Model.ElementAt(i).UserID">Update Password</a>
+                                <a asp-controller="UserMangager" asp-action="UpdatePassword" asp-route-userId="@Model.ElementAt(i).UserID">Reset Password</a>
                             </td>
                         </tr>
                         index++;
